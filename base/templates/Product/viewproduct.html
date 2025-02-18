@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Products</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        th {
+            text-align: center;
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+
+        td.product-cell,
+        td.description-cell {
+            word-break: break-word;
+            hyphens: auto;
+            text-align: center;
+            white-space: normal;
+        }
+
+        td.image-link {
+            text-align: center;
+            padding: 5px;
+        }
+
+        td.image-link img {
+            max-width: 50px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 14px;
+                table-layout: auto;
+            }
+
+            th, td {
+                padding: 8px;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: clip;
+            }
+
+            td.product-cell,
+            td.description-cell {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Products</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in product_vo_lst %}
+                <tr>
+                    <td>{{ product[2]['Category_name'] }}</td>
+                    <td>{{ product[1]['Subcategory_name'] }}</td>
+                    <td class="product-cell">{{ product[0]['Product_name'] }}</td>
+                    <td class="description-cell">{{ product[0]['Product_description'] }}</td>
+                    <td>{{ product[0]['Product_price'] }}</td>
+                    <td>{{ product[0]['Product_stock'] }}</td>
+                    <td class="image-link">
+                        <a href="../static/product_images/{{ product[0].Product_image_name }}" target="_blank">
+                        <img src="../static/product_images/{{
+                                product[0]['Product_image_name'] }}" alt="{{ product[0]['Product_name'] }}"></a>
+                    </td>
+                    <td>
+                        <a href="/delete_product?Product_id={{ product[0]['Product_id'] }}">Delete</a>
+                        <a href="/edit_product?Product_id={{ product[0]['Product_id'] }}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="button-group">
+            <a href="/load_product" class="btn btn-primary">Add Product</a>
+            <a href="/" class="btn btn-primary">Home Page</a>
+        </div>
+    </div>
+</body>
+</html>

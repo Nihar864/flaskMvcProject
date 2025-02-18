@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Categories</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6; /* Light gray border */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Very light gray for header */
+            font-weight: 600;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 5px; /* Add some space between links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            gap: 10px; /* Space between buttons */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 14px; /* Smaller font on mobile */
+            }
+
+            th, td {
+                padding: 8px; /* Smaller padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Categories</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in category_vo_lst %}
+                <tr>
+                    <td>{{ row['Category_name'] }}</td>
+                    <td>{{ row['Category_description'] }}</td>
+                    <td>
+                        <a href="/delete_category?category_id={{ row['Category_id'] }}">Delete</a>
+                        <a href="/edit_category?category_id={{ row['Category_id'] }}">Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="button-group">
+            <a href="/" class="btn btn-primary">Home Page</a>
+            <a href="/load_category" class="btn btn-primary">Add Category</a>
+        </div>
+    </div>
+</body>
+</html>

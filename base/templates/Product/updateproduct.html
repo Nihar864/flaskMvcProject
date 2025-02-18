@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px; /* Adjusted width */
+        }
+
+        .alert { padding: 10px; margin-bottom: 10px; border-radius: 5px; text-align: center;}
+        .alert-danger { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7;}
+        .alert-success { background-color: #d1e7dd; color: #155724; border: 1px solid #c3e6cb;}
+
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        select,
+        input[type="text"],
+        textarea {
+            width: calc(100% - 12px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button[type="submit"], .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            text-size-adjust: auto;
+        }
+
+        button[type="submit"]:hover, .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .file-upload {
+            margin-bottom: 15px;
+        }
+
+        .img-preview {
+            margin-bottom: 15px;
+            text-align: center; /* Center the image */
+        }
+        .img-preview img {
+            max-width: 200px; /* Set a maximum width for the preview */
+            height: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        @media (max-width: 550px) { /* Adjust breakpoint as needed */
+            .container {
+                width: 90%;
+            }
+            .btn-group {
+                flex-direction: column;
+
+            }
+            button[type="submit"], .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        function loadsubcategory() {
+            var Product_category_id = document.getElementById("Product_category_id");
+            var Product_subcategory_id = document.getElementById("Product_subcategory_id");
+            Product_subcategory_id.innerHTML = "";
+
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState === 4 && ajax.status === 200) {
+                    try {
+                        var jsn = JSON.parse(ajax.responseText);
+                        var defaultOption = document.createElement("option");
+                        defaultOption.value = "";
+                        defaultOption.text = "Select Subcategory";
+                        defaultOption.disabled = true;
+                        defaultOption.selected = true;
+                        Product_subcategory_id.appendChild(defaultOption);
+
+                        for (var i = 0; i < jsn.length; i++) {
+                            var opt = document.createElement("option");
+                            opt.value = jsn[i].Subcategory_id;
+                            opt.text = jsn[i].Subcategory_name;
+                            Product_subcategory_id.add(opt);
+
+                            if ("{{ product_vo_lst.Product_subcategory_id }}" == jsn[i].Subcategory_id) {
+                                opt.selected = true;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                        var errorOption = document.createElement("option");
+                        errorOption.text = "Error loading subcategories";
+                        Product_subcategory_id.add(errorOption);
+                    }
+                }
+            };
+            ajax.open("GET", "/ajax_subcategory_product?Product_category_id=" + Product_category_id.value, true);
+            ajax.send();
+        }
+    </script>
+</head>
+<body onload="loadsubcategory()">
+    <div class="container">
+        <h2>Update Product</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/update_product" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" name="Product_id" value="{{ product_vo_lst.Product_id }}">
+
+            <label for="Product_category_id">Category Name:</label>
+            <select name="Product_category_id" id="Product_category_id" onchange="loadsubcategory()" >
+                <option selected disabled>Select Category</option>
+                {% for category in category_vo_lst %}
+                    <option value="{{ category['Category_id'] }}"
+                            {% if category['Category_id'] == product_vo_lst.Product_category_id %}selected{% endif %}>
+                        {{ category['Category_name'] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="Product_subcategory_id">Subcategory:</label>
+            <select id="Product_subcategory_id" name="Product_subcategory_id" >
+                <option selected disabled>Select Subcategory</option>
+            </select>
+
+            <label for="Product_name">Product Name:</label>
+            <input type="text" id="Product_name" name="Product_name" value="{{ product_vo_lst.Product_name }}" >
+
+            <label for="Product_description">Product Description:</label>
+            <textarea id="Product_description" name="Product_description" >{{ product_vo_lst.Product_description }}</textarea>
+
+            <label for="Product_price">Product Price:</label>
+            <input type="text" id="Product_price" name="Product_price" value="{{ product_vo_lst.Product_price }}" >
+
+            <label for="Product_stock">Product Quantity:</label>
+            <input type="text" id="Product_stock" name="Product_stock" value="{{ product_vo_lst.Product_stock }}" >
+
+            <div class="file-upload">
+                <label for="Product_img">File Upload:</label>
+                <input type="file" id="Product_img" name="Product_img" accept="image/png,image/jpeg">
+            </div>
+
+            <div class="img-preview">
+                <img  src="../static/product_images/{{ product_vo_lst
+                .Product_image_name }}" alt="Current Product Image">
+            </div>
+
+            <div class="btn-group">
+                <button type="submit">Update</button>
+                <a href="/" class="btn">Home Page</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

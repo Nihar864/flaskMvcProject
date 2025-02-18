@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subcategory</title>
+    <style>
+        /* Basic styling - Customize as needed */
+        body { font-family: sans-serif; }
+        .container { width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; }
+        .alert { padding: 10px; margin-bottom: 10px; border-radius: 5px; text-align: center;}
+        .alert-danger { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7;}
+        .alert-success { background-color: #d1e7dd; color: #155724; border: 1px solid #c3e6cb;} /* Green for success */
+        label { display: block; margin-bottom: 5px; }
+        input[type="text"] { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        select { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Subcategory</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/add_subcategory">
+            <label for="Subcategory_category_id">Category:</label>
+            <select id="Subcategory_category_id" name="Subcategory_category_id" >
+                <option value="">--Select a Category--</option>  {% for category in category_vo_lst %}
+                    <option value="{{ category.Category_id }}" {% if subcategory and subcategory.subcategory_category_id == category.Category_id %}selected{% endif %}>
+                        {{ category.Category_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="Subcategory_name">Subcategory Name:</label>
+            <input type="text" id="Subcategory_name" name="Subcategory_name" value="{% if subcategory %}{{ subcategory.subcategory_name }}{% endif %}" >
+
+            <label for="Subcategory_description">Subcategory Description:</label>
+            <input type="text" id="Subcategory_description" name="Subcategory_description" value="{% if subcategory %}{{ subcategory.subcategory_description }}{% endif %}" >
+
+            <button type="submit">Add Subcategory</button>
+        </form>
+        <a href="/">Home Page</a>
+    </div>
+</body>
+</html>

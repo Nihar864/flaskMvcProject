@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Subcategories</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left; /* Align text to the left within cells */
+            border-bottom: 1px solid #dee2e6;
+
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+            text-align: left; /* Center the text in header cells */
+        }
+
+
+
+        td.description-cell { /* Target the description cells */
+            word-break: break-word; /* Allow words to break to prevent overflow */
+            hyphens: auto; /* Allow hyphenation for better word breaking */
+            text-align: justify; /* Justify the text within the cell */
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            td.description-cell {
+                text-align: left; /* Align left on smaller screens if desired */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Subcategories</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Subcategory Name</th>
+                    <th>Subcategory Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subcategory in subcategory_vo_lst %}
+                <tr>
+                    <td>{{ subcategory[0].Category_name }}</td>
+                    <td>{{ subcategory[1].Subcategory_name }}</td>
+                    <td class="description-cell">{{ subcategory[1].Subcategory_description }}</td>
+                    <td>
+                        <a href="/delete_subcategory?subcategory_id={{ subcategory[1].Subcategory_id }}">Delete</a>
+                        <a href="/edit_subcategory?subcategory_id={{ subcategory[1].Subcategory_id }}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="button-group">
+            <a href="/load_subcategory" class="btn btn-primary">Add Subcategory</a>
+            <a href="/" class="btn btn-primary">Home Page</a>
+        </div>
+    </div>
+</body>
+</html>

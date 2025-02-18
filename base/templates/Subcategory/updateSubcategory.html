@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Subcategory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .alert { padding: 10px; margin-bottom: 10px; border-radius: 5px; text-align: center;}
+        .alert-danger { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7;}
+        .alert-success { background-color: #d1e7dd; color: #155724; border: 1px solid #c3e6cb;}
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        select,
+        input[type="text"] {
+            width: calc(100% - 12px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .home-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .home-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Subcategory</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/update_subcategory" method="POST">
+            <label for="subcategory_category_id">Category Name:</label>
+            <select id="subcategory_category_id" name="subcategory_category_id" >
+                {% for category in category_vo_lst %}
+                    <option value="{{ category['Category_id'] }}"
+                            {% if category['Category_id'] == subcategory_vo_lst.Subcategory_category_id %}selected{% endif %}>
+                        {{ category['Category_name'] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <input type="hidden" name="subcategory_id" value="{{ subcategory_vo_lst.Subcategory_id }}">
+
+            <label for="subcategory_name">Subcategory Name:</label>
+            <input type="text" id="subcategory_name" name="subcategory_name" value="{{ subcategory_vo_lst.Subcategory_name }}" >
+
+            <label for="subcategory_description">Subcategory Description:</label>
+            <input type="text" id="subcategory_description" name="subcategory_description" value="{{ subcategory_vo_lst.Subcategory_description }}" >
+
+            <button type="submit">Update</button>
+            <div class="home-link">
+                <a href="/view_subcategory">View Subcategory</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
