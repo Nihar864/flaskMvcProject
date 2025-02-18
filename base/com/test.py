@@ -9,7 +9,7 @@ app.config[
 db = SQLAlchemy(app)
 
 
-class UserRole(Enum):
+class UserRole(Enum):                           
     ADMIN = 'admin'
     USER = 'user'
     GUEST = 'guest'
