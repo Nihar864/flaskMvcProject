@@ -3987,3 +3987,158 @@ base.utiles.custom_exception.DataValidationError: Subcategory name must contain 
 
 2025-02-18 10:32:24,520 - INFO - View Subcategory
 
+2025-02-18 15:36:54,322 - INFO - Server Start ===========
+
+2025-02-18 15:37:15,525 - INFO - Server Start ===========
+
+2025-02-18 15:38:35,473 - INFO - Server Start ===========
+
+2025-02-18 15:39:54,167 - INFO - Server Start ===========
+
+2025-02-18 15:40:52,815 - INFO - Server Start ===========
+
+2025-02-18 15:41:43,014 - INFO - Server Start ===========
+
+2025-02-18 15:44:16,757 - INFO - Server Start ===========
+
+2025-02-18 15:44:30,819 - INFO - Server Start ===========
+
+2025-02-18 15:44:54,521 - INFO - Server Start ===========
+
+2025-02-18 15:44:55,940 - INFO - Server Start ===========
+
+2025-02-18 15:44:59,021 - INFO - View Category
+
+2025-02-18 15:46:46,246 - INFO - Server Start ===========
+
+2025-02-18 15:46:47,746 - INFO - Server Start ===========
+
+2025-02-18 15:46:54,600 - INFO - Loading register page
+
+2025-02-18 15:51:26,994 - INFO - Server Start ===========
+
+2025-02-18 15:51:28,661 - INFO - Server Start ===========
+
+2025-02-18 15:52:16,414 - INFO - Loading register page
+
+2025-02-18 16:35:06,747 - INFO - Server Start ===========
+
+2025-02-18 16:35:08,195 - INFO - Server Start ===========
+
+2025-02-18 16:36:10,942 - INFO - Loading register page
+
+2025-02-18 16:37:11,210 - INFO - Server Start ===========
+
+2025-02-18 16:37:18,091 - INFO - Server Start ===========
+
+2025-02-18 16:37:19,643 - INFO - Server Start ===========
+
+2025-02-18 16:39:18,703 - INFO - Server Start ===========
+
+2025-02-18 16:39:20,250 - INFO - Server Start ===========
+
+2025-02-18 16:39:36,004 - INFO - Server Start ===========
+
+2025-02-18 16:39:37,435 - INFO - Server Start ===========
+
+2025-02-18 16:39:40,645 - INFO - Loading register page
+
+2025-02-18 16:40:14,393 - ERROR - {'user_username': ['Unknown field.'], 'user_password': ['Unknown field.']}
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\base\com\controller\register_controller.py", line 32, in add_user
+    validated_data = user_schema.load(data)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\.venv\Lib\site-packages\marshmallow\schema.py", line 792, in load
+    return self._do_load(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\.venv\Lib\site-packages\marshmallow\schema.py", line 999, in _do_load
+    raise exc
+marshmallow.exceptions.ValidationError: {'user_username': ['Unknown field.'], 'user_password': ['Unknown field.']}
+2025-02-18 16:40:27,212 - ERROR - {'user_username': ['Unknown field.'], 'user_password': ['Unknown field.']}
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\base\com\controller\register_controller.py", line 32, in add_user
+    validated_data = user_schema.load(data)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\.venv\Lib\site-packages\marshmallow\schema.py", line 792, in load
+    return self._do_load(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\OneDrive\Desktop\Softvan\Flask\flaskMvcProject\.venv\Lib\site-packages\marshmallow\schema.py", line 999, in _do_load
+    raise exc
+marshmallow.exceptions.ValidationError: {'user_username': ['Unknown field.'], 'user_password': ['Unknown field.']}
+2025-02-18 16:42:37,283 - INFO - Server Start ===========
+
+2025-02-18 16:42:38,837 - INFO - Server Start ===========
+
+2025-02-18 16:42:42,670 - ERROR - Register Service Error: RegisterDao.add_user() missing 1 required positional argument: 'login_vo'
+
+2025-02-18 16:42:45,037 - INFO - Loading register page
+
+2025-02-18 16:42:51,656 - ERROR - Register Service Error: RegisterDao.add_user() missing 1 required positional argument: 'login_vo'
+
+2025-02-18 16:44:07,762 - INFO - Server Start ===========
+
+2025-02-18 16:44:09,263 - INFO - Server Start ===========
+
+2025-02-18 16:44:10,310 - INFO - Loading register page
+
+2025-02-18 16:44:18,356 - ERROR - Register Service Error: (pymysql.err.IntegrityError) (1048, "Column 'user_login' cannot be null")
+[SQL: INSERT INTO register_table (user_login, user_firstname, user_lastname, user_email, user_gender, is_deleted, created_on, modified_on) VALUES (%(user_login)s, %(user_firstname)s, %(user_lastname)s, %(user_email)s, %(user_gender)s, %(is_deleted)s, %(created_on)s, %(modified_on)s)]
+[parameters: {'user_login': None, 'user_firstname': 'fqegf', 'user_lastname': 'erqfq', 'user_email': 'sabhadiyanihar41@gmail.com', 'user_gender': 'male', 'is_deleted': 0, 'created_on': 1739877258, 'modified_on': 1739877258}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+2025-02-18 16:45:52,002 - INFO - Server Start ===========
+
+2025-02-18 16:45:53,436 - INFO - Server Start ===========
+
+2025-02-18 16:45:56,081 - INFO - Loading register page
+
+2025-02-18 16:46:03,183 - ERROR - Register Service Error: (pymysql.err.OperationalError) (1054, "Unknown column 'user_login_id' in 'field list'")
+[SQL: INSERT INTO register_table (user_login_id, user_firstname, user_lastname, user_email, user_gender, is_deleted, created_on, modified_on) VALUES (%(user_login_id)s, %(user_firstname)s, %(user_lastname)s, %(user_email)s, %(user_gender)s, %(is_deleted)s, %(created_on)s, %(modified_on)s)]
+[parameters: {'user_login_id': None, 'user_firstname': 'fcwefw', 'user_lastname': 'weefwef', 'user_email': 'sabhadiyanihar41@gmail.com', 'user_gender': 'male', 'is_deleted': 0, 'created_on': 1739877363, 'modified_on': 1739877363}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-02-18 16:52:06,057 - INFO - Server Start ===========
+
+2025-02-18 16:56:21,851 - INFO - Server Start ===========
+
+2025-02-18 16:59:37,183 - INFO - Server Start ===========
+
+2025-02-18 16:59:41,001 - INFO - Server Start ===========
+
+2025-02-18 16:59:42,423 - INFO - Server Start ===========
+
+2025-02-18 16:59:48,499 - INFO - Loading register page
+
+2025-02-18 16:59:56,514 - ERROR - Register Service Error: (pymysql.err.OperationalError) (1054, "Unknown column 'user_login_id' in 'field list'")
+[SQL: INSERT INTO register_table (user_login_id, user_firstname, user_lastname, user_email, user_gender, is_deleted, created_on, modified_on) VALUES (%(user_login_id)s, %(user_firstname)s, %(user_lastname)s, %(user_email)s, %(user_gender)s, %(is_deleted)s, %(created_on)s, %(modified_on)s)]
+[parameters: {'user_login_id': None, 'user_firstname': 'vwefvwefv', 'user_lastname': 'wefvwev', 'user_email': 'sabhadiyanihar41@gmail.com', 'user_gender': 'female', 'is_deleted': 0, 'created_on': 1739878196, 'modified_on': 1739878196}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-02-18 17:00:58,172 - INFO - Server Start ===========
+
+2025-02-18 17:00:59,674 - INFO - Server Start ===========
+
+2025-02-18 17:01:05,314 - ERROR - Register Service Error: (pymysql.err.OperationalError) (1054, "Unknown column 'user_login_id' in 'field list'")
+[SQL: INSERT INTO register_table (user_login_id, user_firstname, user_lastname, user_email, user_gender, is_deleted, created_on, modified_on) VALUES (%(user_login_id)s, %(user_firstname)s, %(user_lastname)s, %(user_email)s, %(user_gender)s, %(is_deleted)s, %(created_on)s, %(modified_on)s)]
+[parameters: {'user_login_id': None, 'user_firstname': 'qwrf', 'user_lastname': 'qwfvqw', 'user_email': 'sabhadiyanihar41@gmail.com', 'user_gender': 'male', 'is_deleted': 0, 'created_on': 1739878265, 'modified_on': 1739878265}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-02-18 17:02:23,974 - INFO - Server Start ===========
+
+2025-02-18 17:02:25,398 - INFO - Server Start ===========
+
+2025-02-18 17:02:27,127 - INFO - Loading register page
+
+2025-02-18 17:02:39,715 - ERROR - Register Service Error: (pymysql.err.OperationalError) (1054, "Unknown column 'user_login_id' in 'field list'")
+[SQL: INSERT INTO register_table (user_login_id, user_firstname, user_lastname, user_email, user_gender, is_deleted, created_on, modified_on) VALUES (%(user_login_id)s, %(user_firstname)s, %(user_lastname)s, %(user_email)s, %(user_gender)s, %(is_deleted)s, %(created_on)s, %(modified_on)s)]
+[parameters: {'user_login_id': 4, 'user_firstname': 'nihar', 'user_lastname': 'sabhadiya', 'user_email': 'sabhadiyanihar41@gmail.com', 'user_gender': 'male', 'is_deleted': 0, 'created_on': 1739878359, 'modified_on': 1739878359}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-02-18 17:04:11,154 - INFO - Server Start ===========
+
+2025-02-18 17:04:12,686 - INFO - Server Start ===========
+
+2025-02-18 17:04:14,014 - INFO - Loading register page
+
+2025-02-18 17:04:36,662 - INFO - Register User -> <RegisterVo 1> -> <LoginVo 5>
+
